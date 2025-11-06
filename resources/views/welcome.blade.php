@@ -48,6 +48,5 @@
 <footer class="bg-gray-800 text-white py-4 text-center">
     ISAP 2025 &copy; Wszelkie prawa zastrzeżone
 </footer>
-
 </body>
 </html>
