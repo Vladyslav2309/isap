@@ -3,54 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ISA P Lublin</title>
+    <title>ISAP</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans">
-<header class="text-gray-600 body-font">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center justify-between">
+<body class="bg-gray-50 flex flex-col min-h-screen">
+
+<!-- Header -->
+<header class="bg-white shadow">
+    <div class="container mx-auto flex items-center justify-between p-4">
         <!-- Левое лого -->
-        <a href="#">
-            <img src="{{ asset('images/logo-left.png') }}" alt="Left Logo" class="h-16">
+        <a href="#" class="flex items-center">
+            <img src="{{ asset('storage/images/logo-left.png') }}" alt="Логотип ISAP" class="h-12 w-auto">
         </a>
 
         <!-- Меню -->
-        <nav class="flex space-x-6 text-lg md:text-xl">
-            <a href="#">Kontakt</a>
-            <a href="#">O nas</a>
-            <a href="#">Działalność naukowa</a>
-            <a href="#">Wydarzenia</a>
-            <a href="#">Projekty</a>
+        <nav class="flex-1 flex justify-center space-x-6 text-lg font-semibold">
+            <a href="#" class="hover:text-indigo-600">Kontakt</a>
+            <a href="#" class="hover:text-indigo-600">O nas</a>
+            <a href="#" class="hover:text-indigo-600">Działalność naukowa</a>
+            <a href="#" class="hover:text-indigo-600">Wydarzenia</a>
+            <a href="#" class="hover:text-indigo-600">Projekty</a>
+            <!-- Выпадашка Więcej -->
             <div class="relative group">
-                <span class="cursor-pointer">Więcej ▼</span>
-                <div class="absolute hidden group-hover:block bg-white shadow-lg mt-1">
-                    <span class="block px-4 py-2 text-gray-500 cursor-default">link 1</span>
-                    <span class="block px-4 py-2 text-gray-500 cursor-default">link 2</span>
+                <span class="hover:text-indigo-600 cursor-pointer">Więcej ▼</span>
+                <div class="absolute left-0 mt-2 w-40 bg-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none group-hover:pointer-events-auto z-10">
+                    <span class="block px-4 py-2 text-gray-500 cursor-default">Link 1</span>
+                    <span class="block px-4 py-2 text-gray-500 cursor-default">Link 2</span>
                 </div>
             </div>
         </nav>
 
         <!-- Правое лого -->
         <a href="https://www.gov.pl/" target="_blank">
-            <img src="{{ asset('images/logo-right.png') }}" alt="Right Logo" class="h-16">
+            <img src="{{ asset('storage/images/logo-right.png') }}" alt="Gov Logo" class="h-12 w-auto">
         </a>
     </div>
 </header>
 
-
-<!-- Центрированный текст -->
-<main class="flex items-center justify-center h-screen bg-gray-50">
-    <div class="text-center">
-        <h1 class="text-6xl md:text-8xl font-bold text-gray-800 uppercase tracking-wide">STRONA W TRAKCIE</h1>
-        <h2 class="text-4xl md:text-6xl font-semibold text-gray-600 mt-4 uppercase tracking-wide">AKTUALIZACJI</h2>
-    </div>
+<!-- Контент -->
+<main class="flex-1 flex items-center justify-center">
+    <h1 class="text-center text-5xl md:text-6xl font-bold text-gray-800">
+        STRONA W TRAKCIE<br>
+        AKTUALIZACJI
+    </h1>
 </main>
-<footer class="bg-gray-100 text-gray-600 body-font mt-20">
-    <div class="container mx-auto py-6 px-5 flex flex-col items-center">
-        <p class="text-sm text-center">
-            ISAP 2025 &copy; Wszystkie prawa zastrzeżone.
-        </p>
-    </div>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white text-center py-4">
+    ISAP 2025 - Wszystkie prawa zastrzeżone
 </footer>
 
 </body>
