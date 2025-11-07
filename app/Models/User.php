@@ -45,16 +45,11 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
     ];
 
-    public function canAccessPanel($panel): bool
+    public function canAccessPanel(Panel $panel): bool
     {
-        if (app()->environment('local')) {
-            return true;
-        }
-
-        $allowedDomain = config('filament.admin_email_domain');
-
-        return str_ends_with($this->email, "@{$allowedDomain}") && $this->hasVerifiedEmail();
+        return $this->email === 'administrator@administrator.com';
     }
+
 
 
 }
