@@ -48,12 +48,13 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel($panel): bool
     {
         if (app()->environment('local')) {
-
             return true;
         }
 
+        $allowedDomain = config('filament.admin_email_domain');
 
-        return str_ends_with($this->email, '@isaplublinpl.com') && $this->hasVerifiedEmail();
+        return str_ends_with($this->email, "@{$allowedDomain}") && $this->hasVerifiedEmail();
     }
+
 
 }
