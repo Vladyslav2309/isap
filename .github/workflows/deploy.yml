@@ -3,49 +3,45 @@ name: Deploy Laravel
 on:
   push:
     branches:
-      - main 
+      - main
+
 jobs:
   deploy:
     name: Deploy to Server
     runs-on: ubuntu-latest
 
     steps:
-    
       - name: Checkout repository
         uses: actions/checkout@v3
-
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.1
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-   
       - name: Deploy to server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} << 'EOF'
-            set -e  # прерывать выполнение при любой ошибке
+            cd ${{ secrets.DEPLOY_PATH }} || exit
 
-            cd /var/www/isap || exit
-
-            echo "📌 Pull latest code..."
+            echo "🚀 Pulling latest changes..."
             git fetch origin main
             git reset --hard origin/main
 
-            echo "📦 Install/update composer dependencies..."
-            composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
+            echo "📦 Installing composer dependencies..."
+            composer install --no-dev --optimize-autoloader
 
-            echo "🛠 Run migrations..."
+            echo "🧩 Running migrations..."
             php artisan migrate --force
 
-            echo "🗃 Cache Laravel..."
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+            echo "🧹 Clearing and caching Laravel..."
+            php artisan optimize:clear
+            php artisan optimize
 
-            echo "🔧 Set permissions..."
-            chown -R www-data:www-data /var/www/isap
-            chmod -R 775 /var/www/isap/storage /var/www/isap/bootstrap/cache
+            echo "🔐 Setting permissions..."
+            chown -R www-data:www-data ${{ secrets.DEPLOY_PATH }}
+            chmod -R 775 ${{ secrets.DEPLOY_PATH }}/storage
+            chmod -R 775 ${{ secrets.DEPLOY_PATH }}/bootstrap/cache
 
-            echo "✅ Deploy completed."
+            echo "✅ Deployment completed successfully!"
           EOF
